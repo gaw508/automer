@@ -1,0 +1,36 @@
+#
+# Tests relating to the header of the homepage
+#
+test homepage.header
+    open http://www.example.com
+
+    # Check nav opens on hover
+    action mouseover ".nav"
+    assert ".nav-inner".isVisible is true
+
+    # Check logo is on page
+    var logo "#logo"
+    assert logo.text is equal to "My Page"
+
+    # Check logo text changes on click
+    action click logo
+    assert logo.text is equal to "Your Page"
+end
+
+#
+# Procedure to click on the nav to open it
+#
+procedure openNav
+    action click ".nav"
+end
+
+#
+# Tests relating to the navigation of the homepage
+#
+test homepage.navigation
+    open http://www.example.com
+
+    # Open navigation and check it is visible
+    run openNav
+    assert ".nav-inner".isVisible is true
+end

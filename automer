@@ -1,0 +1,19 @@
+#!/usr/bin/env php
+<?php
+
+/**
+ * Run the automer test runner
+ *
+ * @author George Webb <george@webb.uno>
+ */
+
+// TODO: Check php version
+
+// TODO: Autoload dependencies
+
+// TODO: Configure. CLI flags -> configuration file -> defaults/conventions
+
+$configuration = new \gaw508\Automer\Configuration();
+
+$runner = new \gaw508\Automer\Runner($configuration);
+$runner->run();
