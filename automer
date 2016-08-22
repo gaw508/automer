@@ -13,7 +13,13 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 // TODO: Configure. CLI flags -> configuration file -> defaults/conventions
 
-$configuration = new \Automer\Configuration();
+$container = new \Automer\Container();
 
-$runner = new \Automer\Runner($configuration);
+$configuration = new \Automer\Configuration();
+$container->configuration = $configuration;
+
+$climate = new \League\CLImate\CLImate();
+$container->climate = $climate;
+
+$runner = new \Automer\Runner($container);
 $runner->run();

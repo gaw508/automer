@@ -2,6 +2,8 @@
 
 namespace Automer;
 
+use League\CLImate\CLImate;
+
 class Container
 {
     public $configuration;
@@ -14,4 +16,14 @@ class Container
      * @var Data
      */
     public $data;
+
+    /**
+     * @var CLImate
+     */
+    public $climate;
+
+    /**
+     * @var Output
+     */
+    public $output;
 }

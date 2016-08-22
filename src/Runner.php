@@ -6,10 +6,10 @@ class Runner
 {
     private $container;
 
-    public function __construct(Configuration $configuration)
+    public function __construct(Container $container)
     {
-        $this->container = new Container();
-        $this->container->configuration = $configuration;
+        $this->container = $container;
+        $this->container->output = new Output($container);
     }
 
     public function run()

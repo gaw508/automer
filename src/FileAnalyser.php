@@ -54,22 +54,20 @@ class FileAnalyser
                     }
 
                     $proc = null;
-                    echo "END\n";
                     continue;
                 }
 
                 $proc->addLine($line);
             } elseif (strtolower(substr($line, 0, 4)) === 'test') {
-                echo "TEST: $line \n";
+                $this->container->output->out("Parsing test ($line)");
                 $proc = new Test($this->container);
             } elseif (strtolower(substr($line, 0, 9)) === 'procedure') {
-                echo "PROCEDURE: $line \n";
+                $this->container->output->out("Parsing procedure ($line)");
                 $proc = new Procedure($this->container);
             } elseif (strtolower(substr($line, 0, 3)) === 'set') {
                 throw new SyntaxException('Global vars not yet implemented.'); // TODO: change message
                 // $this->container->data->set(Data::SCOPE_GLOBAL, 'x', 'y'); // TODO
             } else {
-                echo $line;
                 throw new SyntaxException('Expected test, procedure or variable declaration, other found.'); // TODO: change message
             }
         }

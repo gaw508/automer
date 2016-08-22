@@ -8,7 +8,9 @@
       "email": "george@webb.uno"
     }
   ],
-  "require": {},
+  "require": {
+    "league/climate": "^3.2"
+  },
   "require-dev": {
     "phpunit/phpunit": "^4",
     "squizlabs/php_codesniffer": "^2.6"
