@@ -6,8 +6,6 @@ class Runner
 {
     private $container;
 
-    private $tests = array();
-
     public function __construct(Configuration $configuration)
     {
         $this->container = new Container();
@@ -35,12 +33,11 @@ class Runner
     private function getFilesToAnalyse()
     {
         // TODO: load in files based on configuration
-        return array();
+        return array(dirname(__DIR__) . '/example-project/homepage.automer');
     }
 
     private function analyseFile($file)
     {
-        // TODO
         $analyser = new FileAnalyser($this->container, $file);
         $analyser->analyse();
     }

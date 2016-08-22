@@ -9,4 +9,6 @@ class Container
     public $tests = array();
 
     public $procedures = array();
+
+    public $data;
 }
