@@ -39,8 +39,10 @@ class Output
         }
     }
 
-    public function error($text)
+    public function error($text, $level = Output::LEVEL_STANDARD)
     {
-        $this->container->climate->error($text);
+        if ($level <= $this->level) {
+            $this->container->climate->error($text);
+        }
     }
 }

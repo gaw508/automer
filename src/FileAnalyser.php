@@ -28,14 +28,17 @@ class FileAnalyser
         $handle = fopen($this->file, 'r');
 
         if (!$handle) {
-            throw new FileException(); // TODO: message
+            throw new FileException('There was an error reading the file', $this->file);
         }
 
         /** @var Block $proc */
         $proc = null;
 
+        $line_no = 0;
+
         // Loop through lines in file
         while (($line = fgets($handle)) !== false) {
+            $line_no++;
             $line = trim($line);
 
             if (empty($line) || substr($line, 0, 1) === '#') {
@@ -59,16 +62,16 @@ class FileAnalyser
 
                 $proc->addLine($line);
             } elseif (strtolower(substr($line, 0, 4)) === 'test') {
-                $this->container->output->out("Parsing test ($line)");
+                $this->container->output->out("Parsing test ($line)", Output::LEVEL_VVV);
                 $proc = new Test($this->container);
             } elseif (strtolower(substr($line, 0, 9)) === 'procedure') {
-                $this->container->output->out("Parsing procedure ($line)");
+                $this->container->output->out("Parsing procedure ($line)", Output::LEVEL_VVV);
                 $proc = new Procedure($this->container);
             } elseif (strtolower(substr($line, 0, 3)) === 'set') {
-                throw new SyntaxException('Global vars not yet implemented.'); // TODO: change message
+                throw new SyntaxException('Global vars not yet implemented.', $this->file, $line_no); // TODO: change message
                 // $this->container->data->set(Data::SCOPE_GLOBAL, 'x', 'y'); // TODO
             } else {
-                throw new SyntaxException('Expected test, procedure or variable declaration, other found.'); // TODO: change message
+                throw new SyntaxException("Unexpected token", $this->file, $line_no);
             }
         }
     }

@@ -2,6 +2,10 @@
 
 namespace Automer;
 
+use Automer\Exception\FileException;
+use Automer\Exception\SyntaxException;
+use Automer\Exception\UnknownCommandException;
+
 class Runner
 {
     private $container;
@@ -39,7 +43,22 @@ class Runner
 
     private function analyseFile($file)
     {
-        $analyser = new FileAnalyser($this->container, $file);
-        $analyser->analyse();
+        try {
+            $analyser = new FileAnalyser($this->container, $file);
+            $analyser->analyse();
+            return;
+        } catch (FileException $e) {
+            $this->container->output->error("{$e->getMessage()}. ({$e->getAutomerFilePath()})");
+        } catch (SyntaxException $e) {
+            $this->container->output->error(
+                "Syntax error: {$e->getMessage()}. Line {$e->getAutomerLine()} in file {$e->getAutomerFilePath()}"
+            );
+        } catch (UnknownCommandException $e) {
+            $this->container->output->error("Unknown command: {$e->getMessage()}");
+        } catch (\Exception $e) {
+            $this->container->output->error("Unexpected error: {$e->getMessage()}", Output::LEVEL_VVV);
+            $this->container->output->error("There was an unexpected error");
+        }
+        exit;
     }
 }
