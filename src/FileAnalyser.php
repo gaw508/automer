@@ -60,13 +60,13 @@ class FileAnalyser
                     continue;
                 }
 
-                $proc->addLine($line);
+                $proc->addLine($line, $line_no);
             } elseif (strtolower(substr($line, 0, 4)) === 'test') {
                 $this->container->output->out("Parsing test ($line)", Output::LEVEL_VVV);
-                $proc = new Test($this->container);
+                $proc = new Test($this->container, $this->file);
             } elseif (strtolower(substr($line, 0, 9)) === 'procedure') {
                 $this->container->output->out("Parsing procedure ($line)", Output::LEVEL_VVV);
-                $proc = new Procedure($this->container);
+                $proc = new Procedure($this->container, $this->file);
             } elseif (strtolower(substr($line, 0, 3)) === 'set') {
                 throw new SyntaxException('Global vars not yet implemented.', $this->file, $line_no); // TODO: change message
                 // $this->container->data->set(Data::SCOPE_GLOBAL, 'x', 'y'); // TODO

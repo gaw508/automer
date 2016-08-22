@@ -54,7 +54,9 @@ class Runner
                 "Syntax error: {$e->getMessage()}. Line {$e->getAutomerLine()} in file {$e->getAutomerFilePath()}"
             );
         } catch (UnknownCommandException $e) {
-            $this->container->output->error("Unknown command: {$e->getMessage()}");
+            $this->container->output->error(
+                "{$e->getMessage()}. Line {$e->getAutomerLine()} in file {$e->getAutomerFilePath()}"
+            );
         } catch (\Exception $e) {
             $this->container->output->error("Unexpected error: {$e->getMessage()}", Output::LEVEL_VVV);
             $this->container->output->error("There was an unexpected error");

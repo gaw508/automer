@@ -2,7 +2,7 @@
 
 namespace Automer\Command;
 
-class Action implements CommandInterface
+class Set implements CommandInterface
 {
     private $command;
 
