@@ -1,16 +1,16 @@
 <?php
 
-namespace gaw508\Automer\Command;
+namespace Automer\Command;
 
-use gaw508\Automer\Exception\RuntimeException;
-use gaw508\Automer\Exception\SyntaxException;
+use Automer\Exception\RuntimeException;
+use Automer\Exception\SyntaxException;
 
 /**
  * Interface CommandInterface
  *
  * Common interface of a Command
  *
- * @package gaw508\Automer\Command
+ * @package Automer\Command
  * @author George Webb <george@webb.uno>
  */
 interface CommandInterface

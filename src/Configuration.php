@@ -1,6 +1,6 @@
 <?php
 
-namespace gaw508\Automer;
+namespace Automer;
 
 class Configuration
 {

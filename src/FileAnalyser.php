@@ -1,9 +1,9 @@
 <?php
 
-namespace gaw508\Automer;
+namespace Automer;
 
-use gaw508\Automer\Exception\FileException;
-use gaw508\Automer\Exception\SyntaxException;
+use Automer\Exception\FileException;
+use Automer\Exception\SyntaxException;
 
 class FileAnalyser
 {

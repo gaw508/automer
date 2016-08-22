@@ -1,6 +1,6 @@
 <?php
 
-namespace gaw508\Automer\Command;
+namespace Automer\Command;
 
 class Action implements CommandInterface
 {

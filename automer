@@ -9,11 +9,11 @@
 
 // TODO: Check php version
 
-// TODO: Autoload dependencies
+require_once __DIR__ . '/vendor/autoload.php';
 
 // TODO: Configure. CLI flags -> configuration file -> defaults/conventions
 
-$configuration = new \gaw508\Automer\Configuration();
+$configuration = new \Automer\Configuration();
 
-$runner = new \gaw508\Automer\Runner($configuration);
+$runner = new \Automer\Runner($configuration);
 $runner->run();

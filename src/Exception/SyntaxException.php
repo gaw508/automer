@@ -1,6 +1,6 @@
 <?php
 
-namespace gaw508\Automer\Exception;
+namespace Automer\Exception;
 
 class SyntaxException extends Exception
 {

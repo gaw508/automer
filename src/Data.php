@@ -1,8 +1,8 @@
 <?php
 
-namespace gaw508\Automer;
+namespace Automer;
 
-use gaw508\Automer\Exception\RuntimeException;
+use Automer\Exception\RuntimeException;
 
 class Data
 {

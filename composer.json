@@ -1,0 +1,26 @@
+{
+  "name": "gaw508/automer",
+  "description": "Scripted functional testing",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "George Webb",
+      "email": "george@webb.uno"
+    }
+  ],
+  "require": {},
+  "require-dev": {
+    "phpunit/phpunit": "^4",
+    "squizlabs/php_codesniffer": "^2.6"
+  },
+  "autoload": {
+    "psr-4": {
+      "Automer\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Automer\\": "tests/"
+    }
+  }
+}
