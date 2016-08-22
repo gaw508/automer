@@ -17,6 +17,7 @@ class Runner
         $this->analyseFiles();
 
         foreach ($this->container->tests as $test) {
+            // TODO: Catch successful, failed, skipped, incomplete tests
             $test->run();
         }
     }

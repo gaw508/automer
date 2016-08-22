@@ -10,5 +10,8 @@ class Container
 
     public $procedures = array();
 
+    /**
+     * @var Data
+     */
     public $data;
 }
