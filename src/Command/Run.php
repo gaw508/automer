@@ -2,13 +2,11 @@
 
 namespace Automer\Command;
 
-class Run implements CommandInterface
+class Run extends AbstractCommand
 {
-    private $command;
-
-    public function __construct($string)
+    protected function getCommandName()
     {
-        $this->command = $string;
+        return 'run';
     }
 
     public function analyse()

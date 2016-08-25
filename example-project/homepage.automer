@@ -2,7 +2,7 @@
 # Tests relating to the header of the homepage
 #
 test homepage.header
-    open http://www.example.com
+    open "http://www.example.com"
 
     # Check nav opens on hover
     action mouseover ".nav"

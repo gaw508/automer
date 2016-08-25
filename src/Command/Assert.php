@@ -2,13 +2,11 @@
 
 namespace Automer\Command;
 
-class Assert implements CommandInterface
+class Assert extends AbstractCommand
 {
-    private $command;
-
-    public function __construct($string)
+    protected function getCommandName()
     {
-        $this->command = $string;
+        return 'assert';
     }
 
     public function analyse()

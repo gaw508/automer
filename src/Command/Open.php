@@ -2,13 +2,11 @@
 
 namespace Automer\Command;
 
-class Open implements CommandInterface
+class Open extends AbstractCommand
 {
-    private $command;
-
-    public function __construct($string)
+    protected function getCommandName()
     {
-        $this->command = $string;
+        return 'open';
     }
 
     public function analyse()

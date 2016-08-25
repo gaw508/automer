@@ -42,7 +42,7 @@ abstract class Block
             }
 
             /** @var CommandInterface $command_object */
-            $command_object = new $class_name($line);
+            $command_object = new $class_name($line, $this->file, $line_no);
             $command_object->analyse();
             $this->commands[$line_no] = $command_object;
         }
@@ -50,6 +50,12 @@ abstract class Block
 
     public function run()
     {
-        // TODO
+        /**
+         * @var int $line_no
+         * @var CommandInterface $command
+         */
+        foreach ($this->commands as $line_no => $command) {
+            $command->run();
+        }
     }
 }
