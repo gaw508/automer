@@ -47,11 +47,15 @@ abstract class AbstractCommand implements CommandInterface
                 } else {
                     $current_arg = array(
                         'type' => static::ARG_TYPE_VARIABLE,
-                        'value' => ''
+                        'value' => $command[$i]
                     );
                 }
             } elseif ($current_arg['type'] === static::ARG_TYPE_VARIABLE) {
                 if ($command[$i] === ' ') {
+                    $this->arguments[] = $current_arg;
+                    $current_arg = false;
+                } elseif ($i + 1 === strlen($command)) {
+                    $current_arg['value'] .= $command[$i];
                     $this->arguments[] = $current_arg;
                     $current_arg = false;
                 } else {
