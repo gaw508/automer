@@ -2,9 +2,7 @@
 
 namespace Automer;
 
-use Automer\Exception\FileException;
-use Automer\Exception\SyntaxException;
-use Automer\Exception\UnknownCommandException;
+use Automer\Exception\Exception;
 
 class Runner
 {
@@ -13,17 +11,34 @@ class Runner
     public function __construct(Container $container)
     {
         $this->container = $container;
-        $this->container->output = new Output($container);
+        $this->container->output = new Output($container, Output::LEVEL_VVV); // TODO: Set level based on config
     }
 
     public function run()
     {
-        $this->analyseFiles();
+        $this->outputVersion();
 
-        foreach ($this->container->tests as $test) {
-            // TODO: Catch successful, failed, skipped, incomplete tests
-            $test->run();
+        try {
+            $this->analyseFiles();
+            foreach ($this->container->tests as $test) {
+                // TODO: Catch successful, failed, skipped, incomplete tests
+                $test->run();
+            }
+            return;
+        } catch (Exception $e) {
+            $this->container->output->error("{$e->getFormattedMessage()}");
+        } catch (\Exception $e) {
+            $this->container->output->error("Unexpected error: {$e->getMessage()}", Output::LEVEL_VVV);
+            $this->container->output->error("There was an unexpected error");
         }
+
+        exit;
+    }
+
+    private function outputVersion()
+    {
+        $version_string = '0.1.0'; // TODO: get version from git repo or phar instead
+        $this->container->output->out("Automer $version_string by George Webb\n");
     }
 
     private function analyseFiles()
@@ -43,24 +58,7 @@ class Runner
 
     private function analyseFile($file)
     {
-        try {
-            $analyser = new FileAnalyser($this->container, $file);
-            $analyser->analyse();
-            return;
-        } catch (FileException $e) {
-            $this->container->output->error("{$e->getMessage()}. ({$e->getAutomerFilePath()})");
-        } catch (SyntaxException $e) {
-            $this->container->output->error(
-                "Syntax error: {$e->getMessage()}. Line {$e->getAutomerLine()} in file {$e->getAutomerFilePath()}"
-            );
-        } catch (UnknownCommandException $e) {
-            $this->container->output->error(
-                "{$e->getMessage()}. Line {$e->getAutomerLine()} in file {$e->getAutomerFilePath()}"
-            );
-        } catch (\Exception $e) {
-            $this->container->output->error("Unexpected error: {$e->getMessage()}", Output::LEVEL_VVV);
-            $this->container->output->error("There was an unexpected error");
-        }
-        exit;
+        $analyser = new FileAnalyser($this->container, $file);
+        $analyser->analyse();
     }
 }

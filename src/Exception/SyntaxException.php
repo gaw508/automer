@@ -15,13 +15,8 @@ class SyntaxException extends Exception
         $this->automer_line = $line;
     }
 
-    public function getAutomerFilePath()
+    public function getFormattedMessage()
     {
-        return $this->automer_file_path;
-    }
-
-    public function getAutomerLine()
-    {
-        return $this->automer_line;
+        return "Syntax error: {$this->getMessage()}. Line {$this->automer_line} in file {$this->automer_file_path}";
     }
 }
