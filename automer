@@ -15,11 +15,14 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 $container = new \Automer\Container();
 
-$configuration = new \Automer\Configuration();
-$container->configuration = $configuration;
+$container->configuration = new \Automer\Configuration();
 
-$climate = new \League\CLImate\CLImate();
-$container->climate = $climate;
+$container->climate = new \League\CLImate\CLImate();
+
+$container->output = new \Automer\Output($container, \Automer\Output::LEVEL_VVV); // TODO: Set level based on config
+
+$error_handler = new \Automer\ErrorHandler($container);
+$error_handler->register();
 
 $runner = new \Automer\Runner($container);
 $runner->run();

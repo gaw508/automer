@@ -11,7 +11,6 @@ class Runner
     public function __construct(Container $container)
     {
         $this->container = $container;
-        $this->container->output = new Output($container, Output::LEVEL_VVV); // TODO: Set level based on config
     }
 
     public function run()
