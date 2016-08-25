@@ -26,9 +26,6 @@ class Runner
             return;
         } catch (Exception $e) {
             $this->container->output->error("{$e->getFormattedMessage()}");
-        } catch (\Exception $e) {
-            $this->container->output->error("Unexpected error: {$e->getMessage()}", Output::LEVEL_VVV);
-            $this->container->output->error("There was an unexpected error");
         }
 
         exit;
