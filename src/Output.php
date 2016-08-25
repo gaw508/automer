@@ -45,4 +45,14 @@ class Output
             $this->container->climate->error($text);
         }
     }
+
+    public function outputPass($message)
+    {
+        $this->container->climate->black()->backgroundGreen()->out($message);
+    }
+
+    public function outputFail($message)
+    {
+        $this->container->climate->backgroundRed()->out($message);
+    }
 }

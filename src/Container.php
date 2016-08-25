@@ -26,4 +26,10 @@ class Container
      * @var Output
      */
     public $output;
+
+    public $results = array(
+        'tests' => 0,
+        'assertions' => 0,
+        'failures' => 0
+    );
 }
