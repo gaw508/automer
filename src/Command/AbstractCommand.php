@@ -2,6 +2,8 @@
 
 namespace Automer\Command;
 
+use Automer\Exception\SyntaxException;
+
 abstract class AbstractCommand implements CommandInterface
 {
     const ARG_TYPE_STRING_LITERAL = 'string_literal';
@@ -54,10 +56,6 @@ abstract class AbstractCommand implements CommandInterface
                 if ($command[$i] === ' ') {
                     $this->arguments[] = $current_arg;
                     $current_arg = false;
-                } elseif ($i + 1 === strlen($command)) {
-                    $current_arg['value'] .= $command[$i];
-                    $this->arguments[] = $current_arg;
-                    $current_arg = false;
                 } else {
                     $current_arg['value'] .= $command[$i];
                 }
@@ -68,6 +66,15 @@ abstract class AbstractCommand implements CommandInterface
                 } else {
                     $current_arg['value'] .= $command[$i];
                 }
+            }
+
+            if ($i + 1 === strlen($command) && $current_arg) {
+                if ($current_arg['type'] === static::ARG_TYPE_STRING_LITERAL) {
+                    throw new SyntaxException('Unclosed string literal', $this->file, $this->line_no);
+                }
+
+                $this->arguments[] = $current_arg;
+                $current_arg = false;
             }
         }
     }

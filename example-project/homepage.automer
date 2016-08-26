@@ -28,7 +28,7 @@ end
 # Tests relating to the navigation of the homepage
 #
 test homepage.navigation
-    open http://www.example.com
+    open "http://www.example.com"
 
     # Open navigation and check it is visible
     run openNav
