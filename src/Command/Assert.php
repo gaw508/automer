@@ -2,6 +2,8 @@
 
 namespace Automer\Command;
 
+use Automer\Exception\SyntaxException;
+
 class Assert extends AbstractCommand
 {
     protected function getCommandName()
@@ -11,7 +13,13 @@ class Assert extends AbstractCommand
 
     public function analyse()
     {
-        // TODO
+        $this->extractArguments();
+
+        if (count($this->arguments) < 2) {
+            throw new SyntaxException(
+                'Invalid arguments', $this->file, $this->line_no
+            );
+        }
     }
 
     public function run()

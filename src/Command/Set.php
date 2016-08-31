@@ -2,6 +2,8 @@
 
 namespace Automer\Command;
 
+use Automer\Exception\SyntaxException;
+
 class Set extends AbstractCommand
 {
     protected function getCommandName()
@@ -11,7 +13,13 @@ class Set extends AbstractCommand
 
     public function analyse()
     {
-        // TODO
+        $this->extractArguments();
+
+        if (count($this->arguments) !== 2) {
+            throw new SyntaxException(
+                'Expected 2 arguments, got ' . count($this->arguments), $this->file, $this->line_no
+            );
+        }
     }
 
     public function run()
